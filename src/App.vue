@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Header></Header>
+    <Shuifei></Shuifei>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Shuifei from './components/Shuifei.vue'
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Shuifei
   }
 }
 </script>

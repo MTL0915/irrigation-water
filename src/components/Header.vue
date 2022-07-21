@@ -8,7 +8,7 @@
             </div>
             <div class="progress-title">广东省农业面源污染在线监控物联平台</div>
             <div class="jingbao-box">
-                <img class="jingbao" src="../assets/images/cb.png">
+                <img class="jingbao" src="../assets/images/header/cb.png">
             </div> 
             <div class="tianqi">
 				<div>
@@ -61,14 +61,14 @@ export default {
     height: 69px;
 
     .header-left{
-        background: url(../assets/images/right3.png);
+        background: url(../assets/images/header/right3.png);
         background-size: 100%;
         width: 66px;
         height: 69px;
     }
 
     .header-middle{
-        background: url(../assets/images/right2.png);
+        background: url(../assets/images/header/right2.png);
         background-size: clip;
         width: calc(100% - 66px - 74px);
         height: 69px;
@@ -116,7 +116,7 @@ export default {
     }
 
     .header-right{
-        background: url(../assets/images/right3.png);
+        background: url(../assets/images/header/right3.png);
         background-size: 100%;
         width: 66px;
         height: 69px;
