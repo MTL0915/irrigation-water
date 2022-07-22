@@ -77,7 +77,7 @@ export default {
         .led-box {
             height: 65px;
             line-height: 65px;
-            width: 205px;
+            width: 220px;
 
             .led-times {
                 font-family: UniDreamLED;
