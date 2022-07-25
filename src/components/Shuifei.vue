@@ -1,241 +1,398 @@
 <template>
-    <div class="center">
-        <div class="box">
-            <!-- 背景框 S -->
-            <div class="bg">
-                <div style="position: relative; height: 28px">
-                    <div class="center1"></div>
-                    <div class="center4"></div>
-                    <div class="center6"></div>
-                </div>
-                <div style="position: relative; height: calc(100% - 56px)">
-                    <div class="center2"></div>
-                    <div style="width: calc(100% - 200px); height: 100%; margin: auto"></div>
-                    <div class="center7"></div> 
-                </div>
-                <div style="position: relative; height: 28px">
-                    <div class="center3"></div>
-                    <div class="center5"></div>
-                    <div class="center8"></div>
-                </div>
+    <div class="box">
+        <!-- 背景框 S -->
+        <div class="bg">
+            <div style="position: relative; height: 28px">
+                <div class="center1"></div>
+                <div class="center4"></div>
+                <div class="center6"></div>
             </div>
-            <!-- 背景框 E -->
-            <div class="title" style="">地图</div>
-            <div class="boxContont">
-                <div class="main_box">
-                    <!--左侧主体-->
-                    <div class="left_main">
-                        <!--施肥桶-->
-                        <div class="pot_cont">
-                            <!--循环遍历每一个桶-->
-                            <div class="pot_box" v-for="item in pots" :key="item.tag" :class="`pot_box${item.num}`">
-                                <a><span>{{item.tag}}&nbsp;-&nbsp;</span><span class="boxL">{{item.volume}}L</span></a>
-                                <div class="pot_water" :class="`pot_water_${item.EnglishNum}`">
-                                    <ul class="water_bg">
-                                        <li class="water_top" :class="`water_top${item.num}`"></li>
-                                        <li class="water_bottom"></li>
-                                    </ul>
-                                    <div class="water_scale"></div>
-                                </div>
-                                <i @click="btnClick($event)" class="btn_s btn_off" :class="`switch_${item.num}`" fn="shuixiang2" :code="`${item.code}`" :shuiliu="`${item.shuiliu}`"></i>
+            <div style="position: relative; height: calc(100% - 56px)">
+                <div class="center2"></div>
+                <div style="width: calc(100% - 200px); height: 100%; margin: auto"></div>
+                <div class="center7"></div> 
+            </div>
+            <div style="position: relative; height: 28px">
+                <div class="center3"></div>
+                <div class="center5"></div>
+                <div class="center8"></div>
+            </div>
+        </div>
+        <!-- 背景框 E -->
+        <div class="title" style="">地图</div>
+        <div class="boxContont">
+            <div class="main_box">
+                <!--左侧主体-->
+                <div class="left_main">
+                    <!--施肥桶-->
+                    <div class="pot_cont">
+                        <!--循环遍历每一个桶-->
+                        <div class="pot_box" v-for="item in pots" :key="item.tag" :class="`pot_box${item.num}`">
+                            <a><span>{{item.tag}}&nbsp;-&nbsp;</span><span class="boxL">{{item.volume}}L</span></a>
+                            <div class="pot_water" :class="`pot_water_${item.EnglishNum}`">
+                                <ul class="water_bg">
+                                    <li class="water_top" :class="`water_top${item.num}`"></li>
+                                    <li class="water_bottom"></li>
+                                </ul>
+                                <div class="water_scale"></div>
                             </div>
+                            <i @click="btnClick($event)" class="btn_s btn_off" :class="`switch_${item.num}`" fn="shuixiang2" :code="`${item.code}`" :shuiliu="`${item.shuiliu}`"></i>
                         </div>
-                        <!--底部管道开关定位-->
-                        <div class="switch_cont">
-                            <a @click="btnClick($event)" class="main_switch btn_s btn_off" code="1" shuiliu="1,2,3"></a>
-                            <a @click="btnClick($event)" class="feiliao_switch btn_s btn_off" fn="ylcqg" code="2" shuiliu="4,5,6,7"></a>
-                            <a @click="btnClick($event)" class="zhushui_switch btn_s btn_off" code="3" shuiliu="19,20,21,22,23,24,25,26,27,28,29,30,31"></a>
-                            <span class="stress_data">0Mpa</span>
-                            <span class="ph_data">0</span>
-                            <span class="nd_data">0<br>us<br>/cn</span>
-                            <div class="hunheji" where="1,2" or="4,5,6,7,8,9,10,11" style="display:none;position:absolute;height:13%;overflow: hidden;">
-                                <div class="luoxuan" style="">
-                                    <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
-                                    <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
-                                    <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
-                                    <img style="height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 水流标签 -->
-                        <div>
-                            <!-- <div class='shuiliu shuiliu1 shuiliuAnimateR' where='1'></div> -->
-                            <div class="shuiliu shuiliu1" where="1" style="position:absolute;height:14px;width:60px;overflow: hidden;">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu2 shuiliuAnimateR' where='1'></div> -->
-                            <div class="shuiliu shuiliu2" where="1" style="">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu3 shuiliuAnimateT' where='1'></div> -->
-                            <div class="shuiliu shuiliu3" where="1" style="position:absolute;height:60px;overflow: hidden;">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu4 shuiliuAnimateR' where='1,2'></div> -->
-                            <div class="shuiliu shuiliu4" where="1,2" style="">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu5 shuiliuAnimateT' where='1,2'></div> -->
-                            <div class="shuiliu shuiliu5" where="1,2" style="position:absolute;height:60px;overflow: hidden;">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu6 shuiliuAnimateL' where='1,2'></div> -->
-                            <div class="shuiliu shuiliu6" where="1,2" style="">
-                                <div class="shuiliu_l" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_l.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_l.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu7" where="1,2">
-                                <div class="shuiliu_l" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_l.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu8" where="1,2,4">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu9 " where="1,2,5">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu10 " where="1,2,6">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu11 " where="1,2,7">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu12 " where="1,2,8">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu13 " where="1,2,9">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu14 " where="1,2,10">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-
-                            <div class="shuiliu shuiliu16 " where="1,2" or="4,5,6,7,8,9,10,11">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu17" where="1,2" or="4,5,6,7,8,9,10,11">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <!-- <div class='shuiliu shuiliu18 shuiliuAnimateB' style='display:none;'  where='1,2' or='4,5,6,7,8,9,10,11'></div> -->
-                            <div class="shuiliu shuiliu19" where="1,3">
-                                <div class="shuiliu_r" style="width: 200px;">
-                                    <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                    <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu20" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu21" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu22" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu23 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu24 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu25 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu26" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu27" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu28" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuT" style="">
-                                    <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                    <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu29 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu30 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
-                            </div>
-                            <div class="shuiliu shuiliu31 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
-                                <div class="shuiliuB" style="">
-                                    <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
-                                </div>
+                    </div>
+                    <!--底部管道开关定位-->
+                    <div class="switch_cont">
+                        <a @click="btnClick($event)" class="main_switch btn_s btn_off" code="1" shuiliu="1,2,3"></a>
+                        <a @click="btnClick($event)" class="feiliao_switch btn_s btn_off" fn="ylcqg" code="2" shuiliu="4,5,6,7"></a>
+                        <a @click="btnClick($event)" class="zhushui_switch btn_s btn_off" code="3" shuiliu="19,20,21,22,23,24,25,26,27,28,29,30,31"></a>
+                        <span class="stress_data">0Mpa</span>
+                        <span class="ph_data">0</span>
+                        <span class="nd_data">0<br>us<br>/cn</span>
+                        <div class="hunheji" where="1,2" or="4,5,6,7,8,9,10,11" style="display:none;position:absolute;height:13%;overflow: hidden;">
+                            <div class="luoxuan" style="">
+                                <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
+                                <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
+                                <img style="display:block;height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
+                                <img style="height:100%" class="" src="../assets/images/shuifei/luoxuan1.png">
                             </div>
                         </div>
                     </div>
+                    <!-- 水流标签 -->
+                    <div>
+                        <!-- <div class='shuiliu shuiliu1 shuiliuAnimateR' where='1'></div> -->
+                        <div class="shuiliu shuiliu1" where="1" style="position:absolute;height:14px;width:60px;overflow: hidden;">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu2 shuiliuAnimateR' where='1'></div> -->
+                        <div class="shuiliu shuiliu2" where="1" style="">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu3 shuiliuAnimateT' where='1'></div> -->
+                        <div class="shuiliu shuiliu3" where="1" style="position:absolute;height:60px;overflow: hidden;">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu4 shuiliuAnimateR' where='1,2'></div> -->
+                        <div class="shuiliu shuiliu4" where="1,2" style="">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu5 shuiliuAnimateT' where='1,2'></div> -->
+                        <div class="shuiliu shuiliu5" where="1,2" style="position:absolute;height:60px;overflow: hidden;">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu6 shuiliuAnimateL' where='1,2'></div> -->
+                        <div class="shuiliu shuiliu6" where="1,2" style="">
+                            <div class="shuiliu_l" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_l.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_l.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu7" where="1,2">
+                            <div class="shuiliu_l" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_l.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu8" where="1,2,4">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu9 " where="1,2,5">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu10 " where="1,2,6">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu11 " where="1,2,7">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu12 " where="1,2,8">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu13 " where="1,2,9">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu14 " where="1,2,10">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+
+                        <div class="shuiliu shuiliu16 " where="1,2" or="4,5,6,7,8,9,10,11">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu17" where="1,2" or="4,5,6,7,8,9,10,11">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <!-- <div class='shuiliu shuiliu18 shuiliuAnimateB' style='display:none;'  where='1,2' or='4,5,6,7,8,9,10,11'></div> -->
+                        <div class="shuiliu shuiliu19" where="1,3">
+                            <div class="shuiliu_r" style="width: 200px;">
+                                <img style="height:50%;margin: 0px 43px;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                                <img style="height:50%;" class="" src="../assets/images/shuifei/shuiliu_r.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu20" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu21" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu22" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu23 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu24 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu25 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu26" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu27" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu28" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu29 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu30 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                        <div class="shuiliu shuiliu31 " where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3">
+                            <div class="shuiliuB" style="">
+                                <img style="display:block;height:50%;margin: 0 0" class="" src="../assets/images/shuifei/shuiliu_b.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右侧主体 -->
+                <div class="right_main">
+                    <!--第一条喷灌阀-->
+                    <ul class="pg_valve">
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                    </ul>
+                    <!--第二条喷灌阀-->
+                    <ul class="pg_valve margin_left pg_valve2">
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                    </ul>
+                    <!--第三条喷灌阀-->
+                    <ul class="pg_valve margin_left pg_valve3">
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                    </ul>
+                    <!--第四条喷灌阀-->
+                    <ul class="pg_valve margin_left pg_valve4">
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                        <li>
+                            <span class="valve_icon"></span>
+                            <a>#1地块</a>
+                            <a>电池阀A</a>
+                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -304,6 +461,10 @@ export default {
         // 控制按钮开关
         btnClick(e){
             console.log(e.target)
+            // 用事件总线把对应按钮的数字传到控制面板组件
+            var code = e.currentTarget.getAttribute("code");
+            this.$bus.$emit('code',code)
+
             if(e.currentTarget.getAttribute("class").includes("btn_off")){
                 e.target.classList.add("btn_on")
                 e.target.classList.remove("btn_off")
@@ -312,7 +473,7 @@ export default {
                 e.target.classList.add("btn_off")
                 e.target.classList.remove("btn_on")
             }
-            // 调整水流
+            // 调整水流，包括水流动画与喷水器动画
             this.tiaozhengshuiliu()
         },
         tiaozhengshuiliu(){
@@ -320,7 +481,8 @@ export default {
 	        var shuiliuBox = document.getElementsByClassName('shuiliu')
 
             // 获取目前开关的情况
-            var openKey = document.getElementsByClassName("btn_s btn_on");        
+            var openKey = document.getElementsByClassName("btn_s btn_on"); 
+            // 把openKey这个类数组变成真正的数组       
             openKey = Array.prototype.slice.apply(openKey);
             openKey = openKey.map((e)=>{ return e.getAttribute("code"); })
             console.log(openKey) 
@@ -380,21 +542,86 @@ export default {
                     // shuiliuItem.hide();
                 }
             }
+
+            // 肥水混合与喷水器动画
+            // 所有的噴水器，加上肥水混合器
+            var penshui = document.getElementsByClassName('penshui1')
+            penshui = Array.prototype.slice.apply(penshui);
+            var hunheji = document.getElementsByClassName('hunheji')
+            hunheji = Array.prototype.slice.apply(hunheji);
+
+            var penshuiBox = penshui.concat(hunheji)
+
+            for( var i = 0 ; i < penshuiBox.length ; i++ ){
+                var penshuiItem = penshuiBox[i];
+                var where = penshuiItem.getAttribute("where");
+                if( !where ) continue;
+                where = where.split(",");
+                var or = penshuiItem.getAttribute("or");
+                if( or ) or = or.split(",");
+                var bool = true;
+                for( var ii in where ){
+                    if( openKey.indexOf(where[ii]) === -1 ){
+                        bool = false;
+                        break;
+                    }
+                } 
+                if( or && bool ){
+                    bool = false;
+                    for( var ii in or ){
+                        if( openKey.indexOf(or[ii]) !== -1 ){						
+                            bool = true;
+                            break;
+                        }
+                    }
+                }
+                
+                var bool1 = true;
+                var where1 = penshuiItem.getAttribute("where1");
+                if( !where1 ) {
+                    bool1=false;
+                }else{
+                    where1 = where1.split(",");
+                    var or1 = penshuiItem.getAttribute("or1");
+                    if( or1 ) or1 = or1.split(",");		
+                    for( var ii in where1 ){
+                        if( openKey.indexOf(where1[ii]) === -1 ){
+                            bool1 = false;
+                            break;
+                        }
+                    }
+                    if( or1 && bool1 ){
+                        bool1 = false;
+                        for( var ii in or1 ){
+                            if( openKey.indexOf(or1[ii]) !== -1 ){						
+                                bool1 = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if( bool || bool1 ){
+                    penshuiItem.style.display = 'block'
+                    // ndcqg(null,true)
+                    // phcqg(null,true)
+                    // sq(null, true)
+                }else{
+                    penshuiItem.style.display = 'none'
+                    // ndcqg(null,false)
+                    // phcqg(null,false)
+                    // sq(null, false)
+                }
+            }
+
         }
     }
 };
 </script>
 
 <style scoped>
-.center {
-    width: calc(100% - 350px);
-    margin-left: 350px;
-    height: calc(100% - 69px);
-    position: relative;
-    padding: 15px;
-    box-sizing: border-box;
-}
-.center .box {
+
+.box {
     position: relative;
     margin: 10px 0;
     height: 100%;

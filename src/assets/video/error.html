@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src='jq.js'></script>
+		<script src='yingshi/ezuikit.js'></script>
+		<script src='cyberplayer-3.4.1/cyberplayer.js'></script>
+		
+		<style>
+			iframe {
+				border:none;
+			}
+			html , body {
+				margin : 0;
+				padding: 0;
+				height:100%;
+				overflow: hidden;
+			}
+			#box {
+				position:absolute;
+				width: 100%;
+				height: 100%;
+			}
+			.opt {
+				position:absolute;
+				bottom: 0;
+				width: 100%;
+				background: #00000088;
+				height:80px;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.icon {
+				position:absolute;
+				cursor: pointer;
+			}
+			.up {
+				left: calc(50% - 8px);
+				top: 0;
+			}
+			.right {
+				right: 0px;
+				top: calc( 50% - 8px );
+				transform: rotateZ(90deg);
+			}
+			.down {
+				left: calc(50% - 8px);
+				bottom: 0;
+				transform: rotateZ(180deg);
+			}
+			.left {
+				left: 0px;
+				top: calc( 50% - 8px );
+				transform: rotateZ(270deg);
+			}
+			.direction {
+				position:relative;
+				height: 70px;
+				width: 70px;
+			}
+			.cap {
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+			}
+			.size > img {
+				cursor: pointer;
+			}
+
+			#test { 
+				width: 100%!important;
+				height: 100%!important;
+			}
+			#test .parent-wnd > div {
+				width: 100%!important;
+				height: 100%!important;
+			}
+
+			#test canvas {
+				width: 100%!important;
+				height: 100%!important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='box'>
+			<div id='test'></div>
+			<!-- <div class='opt'>
+				<div class='size'>
+					<img onmousedown='opts("amplification")' onmouseup='opts("stop_amplification")' src='images/size_0.png' />
+					<img onmousedown='opts("narrow")' onmouseup='opts("stop_narrow")' src='images/size_1.png' />
+				</div>
+				<div class='direction'>
+					<img src='images/direction.png' onmousedown='opts("up")' onmouseup='opts("stop_up")' class='icon up' />
+					<img src='images/direction.png' onmousedown='opts("down")' onmouseup='opts("stop_down")' class='icon down' />
+					<img src='images/direction.png' onmousedown='opts("left")' onmouseup='opts("stop_left")' class='icon left' />
+					<img src='images/direction.png' onmousedown='opts("right")' onmouseup='opts("stop_right")' class='icon right' />
+					<img src='images/direction.png' onclick='captureSxtDevice()' class='icon cap' />
+				</div>
+			</div> -->
+		</div>
+	</body>
+	<script>
+		
+		var param = function(url){
+			var p = {};
+			url = url.substring(1,url.length);
+			url = url.split("&");
+			for(var i in url){
+				var it = url[i];
+				it = it.split("=");
+				var value = decodeURI(url[i].substring(it[0].length+1,url[i].length));
+				if( value == "undefined" || value == "null" ) { value = null; }
+				p[it[0]] = value;
+			}
+			return p;
+		}(location.search);
+
+		var isOpt = param.isOpt;
+		var token = param.token ;
+		var hd_device_id = param.hd_device_id;
+		var device_id = param.device_id;
+		var isTop = null;
+		var opt = null;
+		var playWay = "play";
+		var ip = "http://121.32.129.19:8100/nyy/admin";
+
+		// 是否需要控制器
+		if( isOpt === "false" ) $(".opt").css({display: "none"});
+
+		var opts = function(opts){
+			$.ajax({
+				headers: {
+					"Authorization" : 'Bearer ' + token,
+				},
+				url:ip+"/hd/sxt/controlSxt",//form提交数据的地址
+				// url:"http://192.168.33.182:8000/nyy/admin/hd/sxt/controlSxt",//form提交数据的地址
+				type:"post",
+				data : { 
+					hd_device_id: hd_device_id, 
+					device_id: device_id, 
+					command: opts 
+				},
+		　　		success:(e)=>{
+					opt = opts;
+					if( isTop == true ){
+						isTop = false;
+						// 如果已經松开按键
+						unopts(data);
+					}
+				},
+			})
+		}
+		
+		var unopts = function(){
+			if( opt ){
+				opts("stop_"+opt);
+				opt = null;
+			}else{
+				// 标记一下已经停止按键了
+				isTop = true;
+			}
+		}
+		
+		
+		
+		
+		
+
+		var captureSxtDevice = function(){
+			$.ajax({
+				headers: {
+					"Authorization" : 'Bearer ' + token,
+				},
+				// url:"http://121.32.129.19:8100/nyy/admin/hd/sxt/captureSxtDevice",//form提交数据的地址
+				url:ip+"/hd/sxt/captureSxtDevice",//form提交数据的地址
+				type:"get",
+				data : { 
+					hd_device_id: hd_device_id, 
+					device_id: device_id, 
+				},
+	　　		success:(e)=>{
+					if (res.code === 200) {
+						alert('拍照成功');
+					} else {
+						alert('拍照失败');
+					}		
+				},
+			})
+		}
+
+		
+		// initSxt();
+		
+		// 初始化摄像头
+		function initSxt(){
+			if (playWay === 'play') {//自动选择
+				
+				$.ajax({
+					headers: {
+						"Authorization" : 'Bearer ' + token,
+					},
+					// url:"http://121.32.129.19:8100/nyy/admin/hd/sxt/captureSxtDevice",//form提交数据的地址
+					url:ip+"/hd/hd_device/getDetailById",//form提交数据的地址
+					type:"get",
+					data : { 
+						hd_device_id: hd_device_id, 
+						device_id: device_id
+					},
+		　　		success:(res)=>{
+						
+						if (res.code === 200) {
+								const communication = JSON.parse(res.data.communication)
+								//----------- 萤石云优先自身播放器-----------
+								if (communication.type === 'JK-SXT') {
+									var yingshiSrc = 'ezopen://open.ys7.com/' + communication.config.deviceSerial + '/1.live'
+									getYingShiToken(res => {
+										if (res.code !== 200) {//无法获取萤石Token
+											return
+										} else {
+											playYingshiVideo(yingshiSrc, res.data)
+										}
+									})
+								}
+								//------------安防系统优先RTMP---------------
+								else if (communication.type === 'JK-SXT3') {
+									playWay = 'hd-rtmp'
+									baiduPlay()
+								}
+								//------------乐橙云优先HLS --------------------
+								else if (communication.type === 'JK-SXT4') {
+									playWay = 'hd-hls'
+									baiduPlay()
+								} else {
+									// this.$message.error('暂无该类型摄像头')
+									console.log("暂无该类型摄像头")
+								return
+							}
+						} else {
+							// 获取设备信息失败
+							// this.$message.error(res.msg)
+							return
+						}
+					},
+				})
+			} else {
+				baiduPlay()
+			}
+		}
+
+		function baiduPlay() {
+			//取流使用百度播放器
+			var s = playWay.split("-")
+			// 取视频流
+			getSxtUrlById({
+				hd_device_id: hd_device_id,
+				device_id: device_id,
+				protocol: s[1],
+				definition: s[0]
+			}).then(res => {
+				if (res.code === 200) {
+					var videoAdress = res.data.replace('http://', 'https://')
+					if (videoAdress !== '') {
+						playVideo(videoAdress)
+					}
+				} else {
+					return
+				}
+			})
+		}
+
+		function getYingShiToken(fn){
+			$.ajax({
+				headers: {
+					"Authorization" : 'Bearer ' + token,
+				},
+				// url:"http://121.32.129.19:8100/nyy/admin/hd/sxt/captureSxtDevice",//form提交数据的地址
+				url:ip+"/hd/sxt/getYingShiToken",//form提交数据的地址
+				type:"get",
+				data : {},
+	　　		success:(e)=>{
+					fn && fn(e);
+				}
+			})
+		}
+
+		function getSxtUrlById(data){
+			return new Promise((res , error)=> {
+				$.ajax({
+					headers: {
+						"Authorization" : 'Bearer ' + token,
+					},
+					// url:"http://121.32.129.19:8100/nyy/admin/hd/sxt/captureSxtDevice",//form提交数据的地址
+					url:ip+"/hd/sxt/getSxtUrlById",//form提交数据的地址
+					type:"post",
+					data : data,
+		　　		success:(e)=>{
+						res(e);
+					}
+				})
+			})
+		} 
+
+		function playVideo (url){
+			this.nowPlay = 'baiduVideo'
+			this.baiduPlayer = cyberplayer(document.getElementById("test")).setup({
+				width: '100%', // 宽度，也可以支持百分比(不过父元素宽度要有)this.$refs.video.offsetWidth
+				height: "100%", // 高度，也可以支持百分比
+				title: '基本功能', // 标题
+				file: url, // 播放地址
+				autostart: true, // 是否自动播放
+				stretching: 'uniform', // 拉伸设置
+				repeat: false, // 是否重复播放
+				volume: 100, // 音量
+				controls: true, // controlbar是否显示
+				starttime: 0, // 视频开始播放时间点(单位s)，如果不设置，则可以从上次播放时间点续播
+				ak: '8fa5f129aa3e4d52af02666e4d43884a', // 百度云的 AK
+				controlbar: {
+					barLogo: false
+				}
+			})
+		}
+
+
+		//初始化萤石云播放器
+		function playYingshiVideo(yingshiSrc, yingshiToken) {
+			this.nowPlay = 'yingshiVideo'
+			this.yingshiPlayer = new EZUIKit.EZUIPlayer({
+				id: 'test',
+				autoplay: true,
+				url: yingshiSrc,
+				accessToken: yingshiToken,
+				decoderPath: "./yingshi",
+				width: document.getElementById("box").offsetWidth,
+				height: document.getElementById("box").offsetHeight,
+			});
+		}
+		
+		// playVideo("rtmp://rtmp01open.ys7.com/openlive/ef2c38112cef4a9babe10444ae710115.hd");
+		var yingshiSrc = 'ezopen://open.ys7.com/' + param.ysy + '/1.live'
+		var token = "at.e0swl0u0d8hf097g1cepwnsq7uxl40ja-838adcokws-0ws9o51-bccyfzxok";
+		playYingshiVideo(yingshiSrc,token)
+		
+	</script>
+</html>
