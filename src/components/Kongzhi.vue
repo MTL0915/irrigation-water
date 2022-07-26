@@ -76,7 +76,16 @@ export default {
             switch: 'switch_6',
             name: '注肥阀6'
         },
-        
+        {
+            num: '10',
+            switch: 'switch_7',
+            name: '注肥阀7'
+        },
+        {
+            num: '11',
+            switch: 'switch_8',
+            name: '注肥阀8'
+        }
       ]
     }
   },

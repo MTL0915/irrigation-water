@@ -147,6 +147,12 @@
                                 <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
                             </div>
                         </div>
+                        <div class="shuiliu shuiliu15 " where="1,2,11">
+                            <div class="shuiliuT" style="">
+                                <img style="display:block;height:50%;margin: 55px 0" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                                <img style="height:50%;display:block;" class="" src="../assets/images/shuifei/shuiliu_t.png">
+                            </div>
+                        </div>
 
                         <div class="shuiliu shuiliu16 " where="1,2" or="4,5,6,7,8,9,10,11">
                             <div class="shuiliu_r" style="width: 200px;">
@@ -237,159 +243,12 @@
                 </div>
                 <!-- 右侧主体 -->
                 <div class="right_main">
-                    <!--第一条喷灌阀-->
-                    <ul class="pg_valve">
-                        <li>
+                    <!--喷灌阀-->
+                    <ul class="pg_valve" v-for="item in penguanArr" :key="item.name">
+                        <li v-for="liItem in item.list" :key="liItem.number">
                             <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                    </ul>
-                    <!--第二条喷灌阀-->
-                    <ul class="pg_valve margin_left pg_valve2">
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                    </ul>
-                    <!--第三条喷灌阀-->
-                    <ul class="pg_valve margin_left pg_valve3">
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                    </ul>
-                    <!--第四条喷灌阀-->
-                    <ul class="pg_valve margin_left pg_valve4">
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
-                            <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
-                        </li>
-                        <li>
-                            <span class="valve_icon"></span>
-                            <a>#1地块</a>
-                            <a>电池阀A</a>
+                            <a>{{liItem.dikuaiName}}</a>
+                            <a>{{liItem.dichifaName}}</a>
                             <div class="penshui1" where="1,2" or="4,5,6,7,8,9,10,11" where1="1,3" style="display: none;"></div>
                         </li>
                     </ul>
@@ -454,6 +313,165 @@ export default {
                     code: 9,
                     shuiliu: 13
                 },
+                {
+                    tag: 'G',
+                    num: '7',
+                    EnglishNum: 'seven',
+                    volume: 300,
+                    code: 10,
+                    shuiliu: 14
+                },
+                {
+                    tag: 'H',
+                    num: '8',
+                    EnglishNum: 'eight',
+                    volume: 300,
+                    code: 11,
+                    shuiliu: 15
+                }
+            ],
+            // 喷灌阀
+            penguanArr:[
+                {
+                    name: 'pg_value1',
+                    list:[
+                        {
+                            number: 1,
+                            dikuaiName: '#1地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 2,
+                            dikuaiName: '#2地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 3,
+                            dikuaiName: '#3地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 4,
+                            dikuaiName: '#4地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 5,
+                            dikuaiName: '#5地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 6,
+                            dikuaiName: '#6地块',
+                            dichifaName: '电池阀A'
+                        }
+                    ]
+                },
+                {
+                    name: 'pg_value2',
+                    list:[
+                        {
+                            number: 7,
+                            dikuaiName: '#7地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 8,
+                            dikuaiName: '#8地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 9,
+                            dikuaiName: '#9地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 10,
+                            dikuaiName: '#10地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 11,
+                            dikuaiName: '#11地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 12,
+                            dikuaiName: '#12地块',
+                            dichifaName: '电池阀A'
+                        }
+                    ]
+                },
+                {
+                    name: 'pg_value3',
+                    list:[
+                        {
+                            number: 13,
+                            dikuaiName: '#13地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 14,
+                            dikuaiName: '#14地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 15,
+                            dikuaiName: '#15地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 16,
+                            dikuaiName: '#16地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 17,
+                            dikuaiName: '#17地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 18,
+                            dikuaiName: '#18地块',
+                            dichifaName: '电池阀A'
+                        }
+                    ]
+                },
+                {
+                    name: 'pg_value4',
+                    list:[
+                        {
+                            number: 19,
+                            dikuaiName: '#19地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 20,
+                            dikuaiName: '#20地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 21,
+                            dikuaiName: '#21地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 22,
+                            dikuaiName: '#22地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 23,
+                            dikuaiName: '#23地块',
+                            dichifaName: '电池阀A'
+                        },
+                        {
+                            number: 24,
+                            dikuaiName: '#24地块',
+                            dichifaName: '电池阀A'
+                        }
+                    ]
+                }
             ]
         }
     },
@@ -753,7 +771,7 @@ export default {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 9;
+	z-index: 1;
 	height: 100%;
 	width:100%;
 }
@@ -836,7 +854,7 @@ export default {
 }
 
 .pot_box2 {
-	left: 9%;
+	left: 7%;
 	background-image: url(../assets/images/shuifei/04-2pot_bon.png);
 	height: 60.5%;
 }
@@ -846,7 +864,7 @@ export default {
 }
 
 .pot_box3 {
-	left: 18%;
+	left: 14%;
 	background-image: url(../assets/images/shuifei/04-2pot_bon.png);
 	height: 60.5%;
 }
@@ -856,7 +874,7 @@ export default {
 }
 
 .pot_box4 {
-	left: 27%;
+	left: 21%;
     background-image: url(../assets/images/shuifei/04-2pot_bon.png);
 	height: 60.5%;
 }
@@ -866,7 +884,7 @@ export default {
 }
 
 .pot_box5 {
-	left: 36%;
+	left: 28%;
 	background-image: url(../assets/images/shuifei/04-2pot_bon.png);
 	height: 60.5%;
 }
@@ -876,34 +894,34 @@ export default {
 }
 
 .pot_box6 {
+    left: 35%;
     background-image: url(../assets/images/shuifei/04-2pot_bon.png);
 	height: 60.5%;
-	left: 45%;
 }
 
 .water_top6 {
 	height: 65px;
 }
 
-/* .pot_box7 {
-	left: 48%;
+.pot_box7 {
+    left: 42%;
+    background-image: url(../assets/images/shuifei/04-2pot_bon.png);
+	height: 60.5%;
 }
 
 .water_top7 {
-	height: 30px;
+	height: 65px;
 }
 
 .pot_box8 {
-	left: 667px;
-	width: 131px;
-	height: 474px;
-	background-image: url(../assets/images/shuifei/04-4pot_Hoff.png);
-	display:none;
+    left: 49%;
+    background-image: url(../assets/images/shuifei/04-2pot_bon.png);
+	height: 60.5%;
 }
 
 .water_top8 {
-	height: 40px;
-} */
+	height: 65px;
+}
 
 /*底部相关开关+仪表数据定位*/
 .switch_cont {
@@ -1026,6 +1044,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+    width: 58px;
 }
 
 .pg_valve li {
@@ -1154,7 +1173,7 @@ export default {
 }
 
 .shuiliu9 {
-	left: 14%;
+	left: 12%;
 	top: 40%;
 	height: 47px;
 	width: 13px;
@@ -1162,28 +1181,28 @@ export default {
 }
 
 .shuiliu10 {
-	left: 23%;
+	left: 19%;
 	top: 40%;
 	height: 47px;
 	width: 13px;
 	/* background: url(images/shuiliu_t.png); */
 }
 .shuiliu11 {
-	left: 32%;
+	left: 26%;
 	top: 40%;
 	height: 47px;
 	width: 13px;
 	/* background: url(images/shuiliu_t.png); */
 }
 .shuiliu12 {
-	left: 41%;
+	left: 33%;
 	top: 40%;
 	height: 47px;
 	width: 13px;
 	/* background: url(images/shuiliu_t.png); */
 }
 .shuiliu13 {
-	left: 50%;
+	left: 40%;
 	top: 40%;
 	height: 47px;
 	width: 13px;
@@ -1191,19 +1210,19 @@ export default {
 }
 
 .shuiliu14 {
-	left: 53%;
-	top: 42%;
+	left: 47%;
+	top: 40%;
 	height: 47px;
 	width: 13px;
 	/* background: url(images/shuiliu_t.png); */
 }
 
 .shuiliu15 {
-	left: 729px;
-	top: 322px;
+	left: 54%;
+	top: 40%;
 	height: 47px;
 	width: 13px;
-	background: url(../assets/images/shuifei/shuiliu_t.png);
+	/* background: url(images/shuiliu_t.png); */
 }
 
 .shuiliu16 {
@@ -1503,7 +1522,8 @@ export default {
 		width: 30.5%;
 		display: flex;
 		justify-content: space-between;
-		height:100%
+		height:100%;
+        z-index: 2;
 	}
 	.pot_water {
 		width: 55%;
@@ -1545,7 +1565,8 @@ export default {
 		width: 32%;
 		display: flex;
 		justify-content: space-between;
-		height:100%
+		height:100%;
+        z-index: 2;
 	}
 	.btn_s {
 		width: 15px;
