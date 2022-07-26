@@ -19,32 +19,8 @@
     </div>
     <div class="title">控制面板</div>
       <div class="boxContont flex flex-warp">
-        <div class="row4 flexCenter tab" style="height:40px;">
-          <div class="btn1 kaiqiguangaianniu btn_1" @click="clickBtn($event,'main_switch')">开始灌溉</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_jysf btn_2" onclick="clickBtn(&quot;btn_jysf&quot;,&quot;feiliao_switch&quot;)">加压施肥</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_ggf btn_3" onclick="clickBtn(&quot;btn_ggf&quot;,&quot;zhushui_switch &quot;)">灌溉阀</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff1 btn_4" onclick="clickBtn(&quot;btn_zff1&quot;,&quot;switch_1&quot;)">注肥阀1</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff2 btn_5" onclick="clickBtn(&quot;btn_zff2&quot;,&quot;switch_2&quot;)">注肥阀2</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff3 btn_6" onclick="clickBtn(&quot;btn_zff3&quot;,&quot;switch_3&quot;)">注肥阀3</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff4 btn_7" onclick="clickBtn(&quot;btn_zff4&quot;,&quot;switch_4&quot;)">注肥阀4</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff5 btn_8" onclick="clickBtn(&quot;btn_zff5&quot;,&quot;switch_5&quot;)">注肥阀5</div>
-        </div>
-        <div class="row4 flexCenter" style="height:40px;">
-          <div class="btn1 btn_zff6 btn_9" onclick="clickBtn(&quot;btn_zff6&quot;,&quot;switch_6&quot;)">注肥阀6</div>
+        <div class="row4 flexCenter" style="height:40px;" v-for="item in controlBtns" :key="item.num">
+          <div class="btn1" :class="`btn_${item.num}`" @click="clickBtn($event,item.switch)">{{item.name}}</div>
         </div>
 			</div>
   </div>
@@ -54,24 +30,74 @@
 export default {
   data(){
     return{
-      
+      controlBtns:[
+        {
+            num: '1',
+            switch: 'main_switch',
+            name: '开始灌溉'
+        },
+        {
+            num: '2',
+            switch: 'feiliao_switch',
+            name: '加压施肥'
+        },
+        {
+            num: '3',
+            switch: 'zhushui_switch',
+            name: '灌溉阀'
+        },
+        {
+            num: '4',
+            switch: 'switch_1',
+            name: '注肥阀1'
+        },
+        {
+            num: '5',
+            switch: 'switch_2',
+            name: '注肥阀2'
+        },
+        {
+            num: '6',
+            switch: 'switch_3',
+            name: '注肥阀3'
+        },
+        {
+            num: '7',
+            switch: 'switch_4',
+            name: '注肥阀4'
+        },
+        {
+            num: '8',
+            switch: 'switch_5',
+            name: '注肥阀5'
+        },
+        {
+            num: '9',
+            switch: 'switch_6',
+            name: '注肥阀6'
+        },
+        
+      ]
     }
   },
   methods:{
     clickBtn(e,param){
-      if(e.currentTarget.getAttribute("class").includes("active")){
-          e.target.classList.remove("active")
-      }
-      else{
-          e.target.classList.add("active")
-      }
+      // if(e.currentTarget.getAttribute("class").includes("active")){
+      //     e.target.classList.remove("active")
+      //     console.log(param)
+      // }
+      // else{
+      //     e.target.classList.add("active")
+      //     console.log(param)
+      // }
+      this.$bus.$emit('controlBtn',param)
     }
   },
   mounted(){
-      this.$bus.$on('code',(code)=>{ // 这里一定要用箭头函数
-      console.log(code)
+    this.$bus.$on('code',(code)=>{ // 这里一定要用箭头函数
+      // console.log(code)
       var targetBtn = document.getElementsByClassName(`btn_${code}`)[0]
-      console.log(targetBtn)
+      // console.log(targetBtn)
       if(targetBtn.getAttribute("class").includes("active")){
         targetBtn.classList.remove("active")
       }

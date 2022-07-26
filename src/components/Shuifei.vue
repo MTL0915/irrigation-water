@@ -460,18 +460,23 @@ export default {
     methods:{
         // 控制按钮开关
         btnClick(e){
-            console.log(e.target)
-            // 用事件总线把对应按钮的数字传到控制面板组件
-            var code = e.currentTarget.getAttribute("code");
-            this.$bus.$emit('code',code)
+            console.log(e.target)   
+            var targetBtn = e.currentTarget
+            this.doubleControl(targetBtn)
 
-            if(e.currentTarget.getAttribute("class").includes("btn_off")){
-                e.target.classList.add("btn_on")
-                e.target.classList.remove("btn_off")
+        },
+        // 具体控制逻辑，为了能双向按钮控制
+        doubleControl(targetBtn){
+            // 用事件总线把对应按钮的数字传到控制面板组件
+            var code = targetBtn.getAttribute("code");
+            this.$bus.$emit('code',code)
+            if(targetBtn.getAttribute("class").includes("btn_off")){
+                targetBtn.classList.add("btn_on")
+                targetBtn.classList.remove("btn_off")
             }
             else{
-                e.target.classList.add("btn_off")
-                e.target.classList.remove("btn_on")
+                targetBtn.classList.add("btn_off")
+                targetBtn.classList.remove("btn_on")
             }
             // 调整水流，包括水流动画与喷水器动画
             this.tiaozhengshuiliu()
@@ -485,7 +490,7 @@ export default {
             // 把openKey这个类数组变成真正的数组       
             openKey = Array.prototype.slice.apply(openKey);
             openKey = openKey.map((e)=>{ return e.getAttribute("code"); })
-            console.log(openKey) 
+            // console.log(openKey) 
             
             for( var i = 0 ; i < shuiliuBox.length ; i++ ){
                 var shuiliuItem = shuiliuBox[i];
@@ -615,6 +620,13 @@ export default {
             }
 
         }
+    },
+    mounted(){
+        this.$bus.$on('controlBtn',(param)=>{
+            console.log(param)
+            var targetBtn = document.getElementsByClassName(param)[0]
+            this.doubleControl(targetBtn)
+        })
     }
 };
 </script>
